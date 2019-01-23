@@ -12,15 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import webapp2
+import webapp3
 
 
-class MainPage(webapp2.RequestHandler):
+class MainPage(webapp3.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/plain'
         self.response.write('Hello, World!')
 
 
-app = webapp2.WSGIApplication([
+app = webapp3.WSGIApplication([
     ('/', MainPage),
 ], debug=True)
+
+def main():
+    from paste import httpserver
+    httpserver.serve(app, host = '127.0.0.1', port = '8080')
+
+if __name__ == '__main__':
+    main()
